@@ -33,7 +33,7 @@ LayaAir 2.9 ,Laya引擎库2.7.1,Unity 2018.4.11f1
 
 ### 1.Laya中用到的导航组件库NavMesh.js
 
-<div align="center"><img src="https://linkliu.github.io/tech-landscape/assets/img/Laya/diagram1.png"/></div>
+<div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/Laya/diagram1.png"/></div>
 
 <div align="center">可以直接在Unity中对导航网格进行编辑，非常的方便。</div>
 
@@ -53,7 +53,7 @@ convert_obj_three.py： [https://github.com/lear315/NevMesh.Js/tree/main/python]
 
 **NavMeshExport.cs**是一个Unity中的一个C#脚本，只要放到Unity中即可，便会在Unity中生成一个导出菜单，合并在LayaBox的导出菜单中。如下图
 
-<div align="center"><img src="https://linkliu.github.io/tech-landscape/assets/img/Laya/diagram1.jpg"/></div>
+<div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/Laya/diagram1.jpg"/></div>
 
 点击**Export**按钮，就会把当前的导航网格导出到**ExportNavMesh**文件中，里面就是需要下一步需要的.obj文件。
 
@@ -64,7 +64,7 @@ convert_obj_three.py： [https://github.com/lear315/NevMesh.Js/tree/main/python]
 这个脚本的使用方法是 **python convert_obj_three.py -i xx.obj -o xx.json**，这个命令是把上一步生成的.obj文件转换成.json文件，这样我们就能在LayaBox中使用这个.json文件来进行AI导航了。
 
 我的示例项目中已经做好了一键obj转json的功能，具体的用法是：选中你要转换的obj文件，然后右键，菜单选择**Convert Navmesh to Json**，就回自动在当前目录下生成一个同名的.json文件。这个就是LayaBox需要的文件，把这个文件放在LayaBox中的一个目录中。
-<div align="center"><img src="https://linkliu.github.io/tech-landscape/assets/img/Laya/diagram2.jpg"/></div>
+<div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/Laya/diagram2.jpg"/></div>
 
 ### 3.Unity中用到的NavMeshComponents
 
