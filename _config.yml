@@ -202,3 +202,5 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+    
+encoding: UTF-8
