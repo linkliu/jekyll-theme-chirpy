@@ -7,29 +7,27 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: Chirpy                          # the main title
+title: Game-Tech-Post                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: Focus on game develepment   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, portfolio, sidebar,
-  bootstrap Jekyll theme with responsive web design
-  and focuses on text presentation.
+  游戏技术资料，游戏技术文档
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ''
+url: 'https://linkliu.github.io/game-tech-post'
 
-author: your_full_name                  # change to your full name
+author: Link Liu                  # change to your full name
 
 github:
-  username: github_username             # change to your github username
+  username: linkliu             # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: mucylulu_renhai            # change to your twitter username
 
 social:
-  name: your_full_name                  # it will shows as the copyright owner in Footer
-  email: example@doamin.com             # change to your email address
+  name: Link Liu                  # it will shows as the copyright owner in Footer
+  email: mucylulu@163.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/username      # change to your twitter homepage
@@ -44,7 +42,7 @@ google_site_verification: google_meta_tag_verification # change to your verifica
 
 # Only if your site type is GitHub Project sites and doesn't have a custom domain,
 # change below value to '/projectname'.
-baseurl: ''
+baseurl: '/game-tech-post'
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Shanghai
@@ -84,9 +82,9 @@ theme_mode:   # [light|dark]
 # will automatically add the CDN endpoint prefix.
 #
 # Note: MUST remove it or replace with your CDN
-img_cdn: 'https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images'
+img_cdn: ''
 
-avatar: /commons/avatar.jpg   # the avatar on sidebar, support local or internet resources
+avatar: assets/img/me.png   # the avatar on sidebar, support local or internet resources
 
 
 # boolean type, the global switch for ToC in posts.
