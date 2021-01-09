@@ -72,7 +72,11 @@ Unity中的导航网格的生成需要用到NavMeshComponents组件，目前这�
 
 克隆下来后，你只需要把**Assets/NavMeshComponents**这个文件复制到自己的项目中就行了，其他的东西可以不用。
 
-NavMeshComponents的用法我就不细讲了，各位可以到[https://docs.unity3d.com/Manual/NavMesh-BuildingComponents.html](https://docs.unity3d.com/Manual/NavMesh-BuildingComponents.html)查看，也可以看这个中文的的博客[https://blog.csdn.net/wangjiangrong/article/details/88823523](https://blog.csdn.net/wangjiangrong/article/details/88823523)各位按需观看吧。
+NavMeshComponents的用法我就不细讲了，各位可以到
+[https://docs.unity3d.com/Manual/NavMesh-BuildingComponents.html](https://docs.unity3d.com/Manual/NavMesh-BuildingComponents.html)查看，
+也可以看这个中文的的博客
+[https://blog.csdn.net/wangjiangrong/article/details/88823523](https://blog.csdn.net/wangjiangrong/article/details/88823523)
+各位按需观看吧。
 
 
 
