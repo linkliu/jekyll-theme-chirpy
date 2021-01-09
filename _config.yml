@@ -84,7 +84,7 @@ theme_mode:   # [light|dark]
 # Note: MUST remove it or replace with your CDN
 img_cdn: ''
 
-avatar: /assets/img/me.png   # the avatar on sidebar, support local or internet resources
+avatar: "/assets/img/me.png"   # the avatar on sidebar, support local or internet resources
 
 
 # boolean type, the global switch for ToC in posts.
