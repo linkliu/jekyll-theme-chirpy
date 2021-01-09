@@ -36,9 +36,9 @@ Link Liu 是一名充满热情和好奇游戏开发者，主要涉及的游戏�
 
 #### 联系email
 
-mucylulu@163.com or mucylulu@gmail.com
+mucylulu@163.com 或 mucylulu@gmail.com
 
-#### 
+
 
 
 
