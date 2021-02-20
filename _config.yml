@@ -23,7 +23,7 @@ description: >-                        # used by seo meta and the atom feed
   游戏技术资料，游戏技术文档，Unity，LayaBox，ShaderBook，shaderLab
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'n
-url: 'https://linkliu.github.io/game-tech-post'
+url: 'https://linkliu.github.io/game-tech-post/'
 
 author: Link Liu                  # change to your full name
 
