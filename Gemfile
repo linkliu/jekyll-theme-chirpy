@@ -1,5 +1,4 @@
 source "https://gems.ruby-china.com"
-# frozen_string_literal: true
 
 gemspec
 
