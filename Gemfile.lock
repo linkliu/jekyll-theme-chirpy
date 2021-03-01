@@ -74,7 +74,13 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
+<<<<<<< HEAD
     nokogiri (1.11.1-x64-mingw32)
+=======
+    mini_portile2 (2.5.0)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
+>>>>>>> 2199704 (Bump html-proofer from 3.18.5 to 3.18.6)
       racc (~> 1.4)
     nokogiri (1.11.1-x86_64-darwin)
       racc (~> 1.4)
@@ -110,7 +116,11 @@ GEM
     yell (2.2.2)
 
 PLATFORMS
+<<<<<<< HEAD
   x64-mingw32
+=======
+  ruby
+>>>>>>> 2199704 (Bump html-proofer from 3.18.5 to 3.18.6)
   x86_64-darwin-20
 
 DEPENDENCIES
