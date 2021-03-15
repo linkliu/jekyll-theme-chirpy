@@ -250,7 +250,7 @@ tags: [U3D, Shader,Cookbook,中文版]
 
   - 额外内容
 
-- 向PRB中添加透明度
+- 向PBR中添加透明度
 
   - 始前准备
 
