@@ -32,6 +32,11 @@ Link Liu 是一名充满热情和好奇游戏开发者，主要涉及的游戏�
 
 mucylulu@163.com 或 mucylulu@gmail.com
 
+#### 打赏或捐助 
+  <div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/alipay.jpg"/></div>
+  <div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/wechatpay.jpg"/></div>
+  真的很感谢，愿能真正帮到你
+
 
 
 
