@@ -754,7 +754,7 @@ Nilesh Mohite
 
 代码块，数据库表名，文件夹名字 ，文件名字，文件扩展名，路径名称，虚拟URL（觉得这个翻译不准确），用户输入，推特账号等会按照如下表示：“请输入下面的代码到你的着色器属性块（**Properties **）中” 
 
-```shader
+```c#
 void surf (Input IN, inout SurfaceOutput o) 
 { 
 	float4 c; 
@@ -934,7 +934,7 @@ void surf (Input IN, inout SurfaceOutput o)
 
 每一个Unity游戏开发者应该都对**组件(components)**这个概念非常熟悉。游戏中的对象都有很多的组件，这些组件决定了游戏中的对象看起来是什么样子和会有什么样的行为。然而**游戏脚本(scripts )** 定义的是游戏对象会有怎样的行为，**渲染器(renderers )**决定游戏对象如何出现在屏幕中。 对于我们想要看到游戏对象类型，Unity本身提供了一些渲染器。每一个3D模型通常都有一个网格渲染器。一个游戏对象应该只能有一个渲染器，但是一个渲染器它可以包含多个**材质(materials)**。 每个材质封装了一个着色器--3D图形的最后一环。这些组件的关系可以用如下的示意图表示：
 
-<div align=center><img src="https://linkliu.github.io/game-tech-post/assets/img/shader_book/diagram1.png"/></div>
+![donate](https://linkliu.github.io/game-tech-post/assets/img/shader_book/diagram1.png")
 
 
 
@@ -974,7 +974,7 @@ void surf (Input IN, inout SurfaceOutput o)
    打开着色器你会发现Unity其实已经为我们的着色器生成了一些基本的代码。这些基础代码给了你一个基础的漫反射着色器，而且可以传入一张纹理。我们会在后面的步骤修改这些着色器代码，创建自己的着色器。
       
   7. 首先我们给自己的着色器一个自定义的文件夹【这不是传统的文件夹，我更倾向理解为材质选择路径】，这样方便使用时可以按照这个文件夹找到它。着色器的第一行代码是一段描述，这段描述的作用是当我们为材质选择着色器时，这段描述会会转换成选择路径，给材质添加我们自己的着色器。我们把这个路径重写为 **Shader "CookbookShaders/StandardDiffuse"**。当然你也能在任何时间把它命名为任何路径。不用特别在意这个路径名。然后记得保存我们的代码，然后切换回Unity编辑器。当Unity编辑器检测到着色器代码有更新，它会自动重新编译着色器。修改后的着色器代码如下所示：
-	``` 
+	```c# 
 	Shader "CookbookShaders/StandardDiffuse" {
 		Properties {
 			_Color ("Color", Color) = (1,1,1,1)
@@ -1019,8 +1019,8 @@ void surf (Input IN, inout SurfaceOutput o)
 	      下面时这个示例的屏幕截图：【各位按照自己的情况来就行了，不一定非要找一个跟书本一样的模型】
 	
 
-<div align="center"><img src="https://linkliu.github.io/game-tech-post/assets/img/shader_book/diagram2.png"/></div>	      
-<center>看起来很简陋, 但是着色器开发环境搭建好了，接下来我们可以开发自己想要的着色器了</center>
+![donate](https://linkliu.github.io/game-tech-post/assets/img/shader_book/diagram2.png")     
+_看起来很简陋, 但是着色器开发环境搭建好了，接下来我们可以开发自己想要的着色器了_
 ***
 
   <span id="CBSS_how_it_work"></span>
@@ -1125,7 +1125,7 @@ void surf (Input IN, inout SurfaceOutput o)
 
     如果你以前在Unity4上有写自定义的着色器，很有可能在Unity5中能直接正常使用。即使如此，Unity也有可能在着色器的工作原理上做了细小的改动，这些改动是可能引发一些错误和不一致性。有个变化最明显的重要参数就是光的强度。 光在Unity5中是原来亮度的两倍。所有的旧版本着色器在重写的的时候都应该考虑到这一点；如果你升级了你的着色器或者切换到标准着色器，你不会发现有任何的不同。但是如果你是自己写的光照模型，那么你就要注意确认光的强度不能再乘以二了。我们就用下面的代码举例来确认这种变化：
 
-    ```
+    ```c#
     // Unity 4
     c.rgb = s.Albedo * _LightColor0.rgb * (diff * atten * 2);
     // Unity 5
@@ -1188,26 +1188,26 @@ void surf (Input IN, inout SurfaceOutput o)
 
   当**StandardDiffuse2**这个着色器准备好后，我们就可以开始修改它的属性了：
   1. 在着色器的**属性(Properties )**块中，删除着色器中下面的属性代码，整行删除：
-    ```
+    ```c#
     _MainTex ("Albedo (RGB)", 2D) = "white" {}
     ```
   2. 当我们移除这个必要的属性后，着色器不会被编译直到所有跟**_MainTex**的代码都被移除。然我们删除另外有引用的代码：
-    ```
+    ```c#
     sampler2D _MainTex;
     ```
 
   3. 原始的着色器使用**_MainTex**给游戏模型上色。为了改变这个，我们替换掉**surf()**方法的第一行代码，通过如下代码：
-    ```
+    ```c#
     fixed4 c = _Color;
     ```
 
   4. 当你修改完成之后，返回Unity，然后着色器会被重新编译， 之后我们的材质**检查器**面板中就没有纹理选择这一选项了。 为了完成这个着色器的调整，让我们添加一个额外的属性给着色器，看看会有什么效果。输入下面的代码：
-    ```
+    ```c#
     _AmbientColor ("Ambient Color", Color) = (1,1,1,1)
     ```
 
   5. 我们在材质的**检查器**面板中添加了另一个颜色选项。现在，让我们来额外添加另一种类型的属性来找找属性语法的感觉。添加下面的代码到**属性**代码块中：
-    ```
+    ```c#
     _MySliderValue ("This is a Slider", Range(0,10)) = 2.5
     ```
   6. 我们创建了其他两种不同类型的GUI元素，它们可以让我们与着色器进行可视化的交互。我们这次创建了一个叫做**This is a Slider**的滑动条，就如下图所示：
@@ -1305,22 +1305,22 @@ void surf (Input IN, inout SurfaceOutput o)
 
   下面的步骤展示了如何在表面着色器中使用属性：
   1. 开始之前，我们先删除下面的行的代码,就好像我们在章节***创建一个基本的标准着色器***中删除属性的操作步骤一样，删除**_MainTex**属性：
-  ```
+  ```c#
   _MainTex ("Albedo (RGB)", 2D) = "white" {}
   ```
-  ```
+  ```c#
   sampler2D _MainTex;
   ```
-  ```
+  ```c#
   fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
   ```
   2. 下一步，添加下面这些行的代码到着色器代码中，添加到**CGPROGRAM**下面, add the following lines of code to the shader, below the CGPROGRAM line:
-  ```
+  ```c#
   float4 _AmbientColor;
   float _MySliderValue;
   ```
   3. 当第二部完成之后，我们就可以在着色器中使用属性的值了。我们把**_Color**属性的值与**_AmbientColor**值相加，并且把两者的结果赋值给**o.Albedo**。为了达成目的，我们需要在着色器代码中的**surf()**方法中添加如下代码：
-  ```
+  ```c#
   void surf (Input IN, inout SurfaceOutputStandard o) 
   {
         fixed4 c        = pow((_Color + _AmbientColor), _MySliderValue);
@@ -1331,7 +1331,7 @@ void surf (Input IN, inout SurfaceOutput o)
   }
   ```
   4. 最终你的代码将会是如下所示。如果你在你的VSCode中保存好然后返回Unity编辑器，你的着色器将会重新编译。 如果没有什么错误，那么现在你可以修改材质的环境光和自发光的颜色，当然也可以通过滑动条增加最终颜色的饱和度。听巧妙的噢。
-  ```
+  ```c#
   Shader "CookbookShaders/StandardDiffuse3" 
   {
         // We define Properties in the properties block
@@ -1503,16 +1503,16 @@ void surf (Input IN, inout SurfaceOutput o)
 
   让我们开始创建我们的标准着色器，首先在Unity中新建一个标准着色器，然后按照下面的步骤进行修改：
   1. 首先在着色器的属性列表移除除**_Color**之外的所有属性：
-  ``` 
+  ```c# 
   _Color ("Color", Color) = (1,1,1,1)
   ```
   2. 在**SubShader{}**代码块中，移除**_MainTex**，**_Glossiness**和**_Metallic**这三个变量。但是你不能删除**uv_MainTex** 这个变量，因为**Cg**着色器语言不允许输入结构体为空。这个值会被Unity简单的忽略。
   3. 删除**surf()**函数内代码内容并且把下面代码放在里面：
-  ```
+  ```c#
   o.Albedo = _Color.rgb;
   ```
   4. 最终，你的着色器代码应该如下所示：
-  ```
+  ```c#
   Shader "CookbookShaders/Diffuse" 
   {
       Properties 
@@ -1617,7 +1617,7 @@ void surf (Input IN, inout SurfaceOutput o)
 
   在包组中的元素能像常见的结构体那样访问。通常它们表示成**x**，**y**，**z** 和**w** 。然而Cg语言还有另一种表示，就是**r**，**g**，**b**，**a**。尽管你使用**x**或者**r**去表示都是可以的，但是对于代码阅读者来说它们之间的区别就非常的大了。事实上，在着色器编程中，经常涉及到的就是位置和颜色的计算。你可能对下面的标准着色器代码中的代码片段还有印象吧：
 
-  ```
+  ```c#
   o.Alpha = _Color.a;
   ```
 
@@ -1625,13 +1625,13 @@ void surf (Input IN, inout SurfaceOutput o)
 
   这里还有一个很重要的包组的特性，这种特性在C#中没有：**swizzling**[这个不知道怎么翻译]。Cg允许仅通过简单的一行代码就对包组内的元素进行寻址和重新排序。又是下面在标准着色器中熟悉的代码片段：
   
-  ```
+  ```c#
   o.Albedo = _Color.rgb;
   ```
   
   **Albedo** 是一个 **fixed3**类型，也就是说它里面包含了三个**fixed**类型的值。 然而**_Color** 是一个**fixed4**类型的定义。由于**_Color**定义包含的元素比 **Albedo**定义包含的元素要多，直接赋值的话，由于不匹配，肯定会产生一个编译错误。如果用C#代码来进行同样的操作，代码如下所示：
   
-  ```
+  ```c#
   o.Albedo.r = _Color.r;
   o.Albedo.g = _Color.g;
   o.Albedo.b = _Color.b;
@@ -1639,7 +1639,7 @@ void surf (Input IN, inout SurfaceOutput o)
   
   相比于C#代码，在Cg语言中，我们可以用如下代码简写：
   
-  ```
+  ```c#
   o.Albedo = _Color.rgb;
   ```
   
@@ -1647,7 +1647,7 @@ void surf (Input IN, inout SurfaceOutput o)
   
   最后要讲一点，当一个单精度值赋值给包组时，这个值会被复制到包组的所有元素中去：
   
-  ```
+  ```c#
   o.Albedo = 0; // Black =(0,0,0)
   o.Albedo = 1; // White =(1,1,1)
   ```
@@ -1656,7 +1656,7 @@ void surf (Input IN, inout SurfaceOutput o)
   
   **Swizzling**还可以被用作表达式的左值，不过仅当包组的具体元素能被这样使用：
   
-  ```
+  ```c#
   o.Albedo.rg = _Color.rg;
   ```
   
@@ -1668,7 +1668,7 @@ void surf (Input IN, inout SurfaceOutput o)
   
   真正发挥**swizzling**特性潜力的是在它应用于压缩矩阵的时候。Cg语言允许像**float4x4**这种类型，这是一个四行四列的矩阵。你可以使用***_mRC***标记访问矩阵中的单个元素，**R**表示元素所在的行而**C**表示元素所在的列：
   
-  ```
+  ```c#
   float4x4 matrix; 
   // ... 
   float first = matrix._m00; 
@@ -1677,13 +1677,13 @@ void surf (Input IN, inout SurfaceOutput o)
   
   **_mRC**标记还可以接连使用：
   
-  ```
+  ```c#
   float4 diagonal = matrix._m00_m11_m22_m33;
   ```
   
   如果要获取矩阵的整行，可以使用中括号：
   
-  ```
+  ```c#
   float4 firstRow = matrix[0]; 
   // Equivalent to 
   float4 firstRow = matrix._m00_m01_m02_m03;
@@ -1739,20 +1739,20 @@ UV数据保存在3D模型中并且需要3D模型工具去编辑它们。有些�
 
   当通过材质的查看面板使用标准材质的时候，纹理贴图背后的处理过程对于开发者来说是透明的。如果我们想了解它是如何工作的，那我们需要更加详细的了解我们刚才创建的**TexturedShader**着色器。在着色器的**属性Properties**部分，我们可以看到**Albedo (RGB)**的纹理跟代码的关联如下代码所示：
   
-  ```
+  ```c#
   MainTex:
   _MainTex ("Albedo (RGB)", 2D) = "white" {}
   ```
   
   在我们着色器代码中的**CGPROGRAM**代码块部分，纹理被定义为**sampler2D**类型，这是一种标准的2D纹理类型：
   
-  ```
+  ```c#
   sampler2D _MainTex;
   ```
   
   紧接着下一行给我们展示了**Input**这个结构。这个结构就是**surface** 函数中得输入参数并且这个结构包含了一个叫做**uv_MainTex**的包组数组：
   
-  ```
+  ```c#
   struct Input 
   {
   	float2 uv_MainTex;
@@ -1763,7 +1763,7 @@ UV数据保存在3D模型中并且需要3D模型工具去编辑它们。有些�
   
   终于，UV数据被用来在**surface **函数中展示成一张纹理：
   
-  ```
+  ```c#
   fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
   ```
   

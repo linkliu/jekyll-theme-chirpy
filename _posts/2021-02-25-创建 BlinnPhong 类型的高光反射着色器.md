@@ -29,7 +29,7 @@ math: true
 
   按照下面的步骤走，我们来创建**BlinnPhong**光照模型：
   1. 首先，我们需要在着色器的**属性(Properties)**块中添加我们需要用到的属性，这样好让我们控制高光效果：
-  ```
+  ```c#
   Properties
   {
     _MainTint ("Diffuse Tint", Color) = (1,1,1,1)
@@ -39,14 +39,14 @@ math: true
   }
   ```
   2. 接下来在**CGPROGRAM**块中添加与属性对应的变量，这样我们就可以获得来自**属性(Properties)**中的数据：
-  ```
+  ```c#
   sampler2D _MainTex;
   float4 _MainTint;
   float4 _SpecularColor;
   float _SpecPower;
   ```
   3. 接下来就是要创建我们自定义的光照模型了，用来处理漫反射和高光的计算，代码如下所示:
-  ```
+  ```c#
   fixed4 LightingCustomBlinnPhong (SurfaceOutput s, fixed3 lightDir,half3 viewDir, fixed atten)
   {
       float NdotL = max(0,dot(s.Normal, lightDir));
@@ -60,7 +60,7 @@ math: true
   }
   ```
   4. 为了完成我们的着色器，我们还需要告知着色器的**CGPROGRAM**块使用我们自定义的光照模型而不是Unity内建的，修改**#pragma**指示，改成如下代码所示：
-  ```
+  ```c#
   CPROGRAM
   #pragma surface surf CustomBlinnPhong
   ```
@@ -87,7 +87,7 @@ math: true
     $$H\frac{V+L}{|V+L|} $$
     
     这里 的$\|V+L\|$表示向量$V+L$的长度。在Cg中，我们简单的将视角方向和光线方向相加并且对结果进行标准化成一个单位向量：
-    ```
+    ```c#
     float3 halfVector = normalize(lightDir + viewDir);  
     ```
     然后，我们简单的对顶点的法线和我们的中间向量求点积，从而获得我们主要的高光值。在这之后，我们把它用指数**_SpecPower**进行指数运算并且乘以高光颜色变量**_SpecularColor**。跟**Phong**高光比起来，整个算法在代码量和运算量上都要少很多，但在很多实时渲染情况中，它依然能给我们带来很好的高光效果。 
